@@ -1,6 +1,8 @@
 package com.emami.pedometerplayground
 
+import android.app.NotificationManager
 import android.app.Service
+import android.content.Context
 import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -30,15 +32,21 @@ class PedometerForegroundService : Service(), SensorEventListener {
     private var countedStepDetector = -1
     private var countedAccelerometerOne = -1
     private var countedAccelerometerTwo = -1
+    private val notificationManager by lazy { getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
 
     val stepLogLiveData = MutableLiveData<StepLogData>()
 
     override fun onCreate() {
         super.onCreate()
+        startForeground(
+            123123,
+            NotificationUtil.createNotification(notificationManager,this)
+        )
         sensorManager = ContextCompat.getSystemService(this, SensorManager::class.java)?.also {
             initSensors(it)
         }
     }
+
 
     private fun initSensors(sensorManager: SensorManager) {
         sensorManager.run {
@@ -158,7 +166,9 @@ class PedometerForegroundService : Service(), SensorEventListener {
             val dataSize: Int = mRawDataList.size
             for (i in 0 until dataSize) {
                 mRawDataList[i].value = sqrt(
-                    mRawDataList[i].x.toDouble().pow(2.0) + mRawDataList[i].y.toDouble().pow(2.0) + mRawDataList[i].z.toDouble().pow(2.0)
+                    mRawDataList[i].x.toDouble().pow(2.0) + mRawDataList[i].y.toDouble().pow(2.0) + mRawDataList[i].z.toDouble().pow(
+                        2.0
+                    )
                 )
                 mRawDataList[i].time = mRawDataList[i].time / 1000000L + timeOffsetValue
             }
