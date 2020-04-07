@@ -13,6 +13,9 @@ import android.os.IBinder
 import android.os.SystemClock
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
+import com.emami.pedometerplayground.model.AccelerometerData
+import com.emami.pedometerplayground.model.StepLogData
+import com.emami.pedometerplayground.util.NotificationUtil
 import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
@@ -156,7 +159,8 @@ class PedometerForegroundService : Service(), SensorEventListener {
     private fun processEventUsingSecondAccelerometerAlgorithm(event: SensorEvent?) {
         event?.let {
             //start recording
-            val mAccelerometerData = AccelerometerData()
+            val mAccelerometerData =
+                AccelerometerData()
             mAccelerometerData.x = event.values[0]
             mAccelerometerData.y = event.values[1]
             mAccelerometerData.z = event.values[2]
@@ -255,7 +259,14 @@ class PedometerForegroundService : Service(), SensorEventListener {
         super.onDestroy()
         sensorManager?.unregisterListener(this)
         //Reset data in UI
-        stepLogLiveData.postValue(StepLogData("-1", "-1", "-1", "-1"))
+        stepLogLiveData.postValue(
+            StepLogData(
+                "-1",
+                "-1",
+                "-1",
+                "-1"
+            )
+        )
     }
 
     inner class StepBinder : Binder() {

@@ -1,4 +1,4 @@
-package com.emami.pedometerplayground
+package com.emami.pedometerplayground.util
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import com.emami.pedometerplayground.MainActivity
 
 object NotificationUtil {
     fun createNotification(notificationManager: NotificationManager, context: Context): Notification {
