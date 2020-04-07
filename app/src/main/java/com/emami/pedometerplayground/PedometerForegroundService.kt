@@ -32,22 +32,23 @@ class PedometerForegroundService : Service(), SensorEventListener {
     private var countedStepDetector = -1
     private var countedAccelerometerOne = -1
     private var countedAccelerometerTwo = -1
-    private val notificationManager by lazy { getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
-
+    //Dispatches the counted results to the Observers
     val stepLogLiveData = MutableLiveData<StepLogData>()
+
+    private val notificationManager by lazy { getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
 
     override fun onCreate() {
         super.onCreate()
         startForeground(
             123123,
-            NotificationUtil.createNotification(notificationManager,this)
+            NotificationUtil.createNotification(notificationManager, this)
         )
         sensorManager = ContextCompat.getSystemService(this, SensorManager::class.java)?.also {
             initSensors(it)
         }
     }
 
-
+    //Checks if the required sensors exists and registers listeners to them
     private fun initSensors(sensorManager: SensorManager) {
         sensorManager.run {
             getDefaultSensor(Sensor.TYPE_ACCELEROMETER)?.let { sensor ->
@@ -253,6 +254,7 @@ class PedometerForegroundService : Service(), SensorEventListener {
     override fun onDestroy() {
         super.onDestroy()
         sensorManager?.unregisterListener(this)
+        //Reset data in UI
         stepLogLiveData.postValue(StepLogData("-1", "-1", "-1", "-1"))
     }
 
