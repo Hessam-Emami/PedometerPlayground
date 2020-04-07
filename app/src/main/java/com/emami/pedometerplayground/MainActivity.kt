@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -14,10 +15,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), ServiceConnection {
 
     private var isServiceBounded = false
+    private var isServiceStarted = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        startPedometerService()
 
         main_btn_start.setOnClickListener {
             startPedometerService()
@@ -38,15 +41,32 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
         if (isServiceBounded) {
             unbindService(this)
         }
-        Intent(this, PedometerForegroundService::class.java).also {
-            stopService(it)
+        if (isServiceStarted) {
+            Intent(this, PedometerForegroundService::class.java).also {
+                stopService(it)
+            }
         }
+        isServiceBounded = false
+        isServiceStarted = false
+        changeButtonState(true)
     }
 
     private fun startPedometerService() {
         Intent(this, PedometerForegroundService::class.java).run {
             ContextCompat.startForegroundService(this@MainActivity, this)
             bindService(this, this@MainActivity, Context.BIND_AUTO_CREATE)
+        }
+        isServiceStarted = true
+        changeButtonState(false)
+    }
+
+    private fun changeButtonState(shouldShowStartButton: Boolean) {
+        if (shouldShowStartButton) {
+            main_btn_start.visibility = View.VISIBLE
+            main_btn_stop.visibility = View.GONE
+        } else {
+            main_btn_start.visibility = View.GONE
+            main_btn_stop.visibility = View.VISIBLE
         }
     }
 
