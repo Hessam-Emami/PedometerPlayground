@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">PedometerPlayground</string>
+    <string name="stop">Stop</string>
+    <string name="start">Start</string>
+    <string name="default_counted_value">-1</string>
+    <string name="accelerometer_custom_algorithm_2">Accelerometer, Custom algorithm 2, Uses signal processing, Can estimate type of activity like walking or running</string>
+    <string name="accelerometer_custom_algorithm_1">Accelerometer, Custom algorithm 1, Uses simple calculations, less accurate, more false positives</string>
+    <string name="step_counter">Step Counter, Built-in sensor, high accuracy but more delay, may not exist in some devices</string>
+    <string name="step_detector">Step Detector, Built-in sensor, Faster but less accurate, may not exist in some devices</string>
 </resources>
