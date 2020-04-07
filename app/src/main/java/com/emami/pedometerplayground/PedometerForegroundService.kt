@@ -109,6 +109,14 @@ class PedometerForegroundService : Service(), SensorEventListener {
                 processEventUsingSecondAccelerometerAlgorithm(event)
             }
         }
+        stepLogLiveData.postValue(
+            StepLogData(
+                countedAccelerometerOne.toString(),
+                countedAccelerometerTwo.toString(),
+                countedStepCounter.toString(),
+                countedStepDetector.toString()
+            )
+        )
     }
 
     var previousMagnitude = 0.0
@@ -244,6 +252,7 @@ class PedometerForegroundService : Service(), SensorEventListener {
     override fun onDestroy() {
         super.onDestroy()
         sensorManager?.unregisterListener(this)
+        stepLogLiveData.postValue(StepLogData("-1", "-1", "-1", "-1"))
     }
 
     inner class StepBinder : Binder() {

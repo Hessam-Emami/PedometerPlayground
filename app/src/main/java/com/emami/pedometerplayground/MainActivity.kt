@@ -27,6 +27,13 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        if (isServiceBounded) {
+            unbindService(this)
+        }
+    }
+
     private fun stopPedometerService() {
         if (isServiceBounded) {
             unbindService(this)
@@ -60,8 +67,9 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
     }
 
     private fun populateStepData(stepLog: StepLogData?) {
-        main_tv_accelerometer_one.text = stepLog?.stepDetector
-        main_tv_step_counter.text = stepLog?.accelerometer
-        main_tv_step_detector.text = stepLog?.stepCounter
+        main_tv_accelerometer_one.text = stepLog?.accelerometerOne
+        main_tv_step_counter.text = stepLog?.stepCounter
+        main_tv_step_detector.text = stepLog?.stepDetector
+        main_tv_accelerometer_two.text = stepLog?.accelerometerTwo
     }
 }
