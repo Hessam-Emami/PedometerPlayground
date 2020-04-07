@@ -59,6 +59,7 @@ class PedometerForegroundService : Service(), SensorEventListener {
                     sensor,
                     SensorManager.SENSOR_DELAY_NORMAL
                 )
+                //Every 10 seconds get the entry list of data for AccelerometerSecondAlgorithm and process
                 val mProcessDataTask =
                     ProcessDataTask()
                 mScheduledProcessDataTask = mScheduledExecutorService.scheduleWithFixedDelay(
