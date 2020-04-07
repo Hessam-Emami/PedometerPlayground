@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TextAppearance.PedometerPlayground.Body" parent="">
+        <item name="android:textStyle">bold</item>
+        <item name="android:typeface">monospace</item>
+    </style>
 </resources>
