@@ -68,8 +68,8 @@ class PedometerForegroundService : Service(), SensorEventListener {
                     ProcessDataTask()
                 mScheduledProcessDataTask = mScheduledExecutorService.scheduleWithFixedDelay(
                     mProcessDataTask,
-                    10,
-                    10,
+                    20,
+                    20,
                     TimeUnit.SECONDS
                 )
             }
@@ -136,13 +136,13 @@ class PedometerForegroundService : Service(), SensorEventListener {
             val diff = magnitude - previousMagnitude
             previousMagnitude = magnitude
             // 7 is an experimental threshold
-            if (diff > 7) {
+            if (diff > 6) {
                 countedAccelerometerOne++
             }
         }
     }
 
-    private val WALKINGPEAK = 18
+    private val WALKINGPEAK = 12
 
     var mAccelerometerDataList =
         ArrayList<AccelerometerData>()
@@ -188,7 +188,7 @@ class PedometerForegroundService : Service(), SensorEventListener {
             }
             //Calculating the High Peaks
             findHighPeaks()
-            //Remove high peaks close to each other which are within range of 0.4 seconds
+            //Remove high peaks close to each other which are within range of 0.3 seconds
             removeClosePeaks()
             //Find the type of step (Running, jogging, walking) & store in Database
             findStepTypeAndStoreInDB()
