@@ -10,16 +10,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".daisy.DaisyDebugActivity">
+
+        </activity>
+        <activity android:name=".google_sample.GooglePedometerActivity">
+
+        </activity>
+        <activity android:name=".uwaterloo.lab3_201_04.WaterlooActivity">
+
+        </activity>
+        <activity android:name=".oxford.OxfordActivity">
+
+        </activity>
+        <activity android:name=".daisy.DaisyMainActivity">
+
+        </activity>
+        <activity android:name=".filtering.FilteringActivity">
+
+        </activity>
 
         <service
-            android:name=".PedometerForegroundService"
+            android:name=".main.PedometerForegroundService"
             android:enabled="true"
             android:exported="false" />
 
