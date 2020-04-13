@@ -1,4 +1,4 @@
-package com.emami.pedometerplayground.model
+package com.emami.pedometerplayground.main.model
 
 class AccelerometerData {
     var isRealPeak: Boolean = true

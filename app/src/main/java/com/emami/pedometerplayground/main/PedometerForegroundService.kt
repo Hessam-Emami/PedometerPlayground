@@ -1,4 +1,4 @@
-package com.emami.pedometerplayground
+package com.emami.pedometerplayground.main
 
 import android.app.NotificationManager
 import android.app.Service
@@ -11,11 +11,12 @@ import android.hardware.SensorManager
 import android.os.Binder
 import android.os.IBinder
 import android.os.SystemClock
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
-import com.emami.pedometerplayground.model.AccelerometerData
-import com.emami.pedometerplayground.model.StepLogData
-import com.emami.pedometerplayground.util.NotificationUtil
+import com.emami.pedometerplayground.main.model.AccelerometerData
+import com.emami.pedometerplayground.main.model.StepLogData
+import com.emami.pedometerplayground.main.util.NotificationUtil
 import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
@@ -54,6 +55,9 @@ class PedometerForegroundService : Service(), SensorEventListener {
     //Checks if the required sensors exists and registers listeners to them
     private fun initSensors(sensorManager: SensorManager) {
         sensorManager.run {
+
+            val motion = getDefaultSensor(Sensor.TYPE_SIGNIFICANT_MOTION)
+            Log.d("Motion", motion.toString())
             getDefaultSensor(Sensor.TYPE_ACCELEROMETER)?.let { sensor ->
                 countedAccelerometerOne = 0
                 countedAccelerometerTwo = 0
