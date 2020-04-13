@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,8 +47,6 @@ public class OxfordActivity extends AppCompatActivity {
     private TextView tv_GT;
     private TextView tv_HWSteps;
     private Button btn_toggleStepCounter;
-    private Switch sw_logFile;
-    private Switch sw_connectGT;
 
     // Internal state
     private boolean isEnabled = false;
@@ -83,14 +80,6 @@ public class OxfordActivity extends AppCompatActivity {
         tv_HWSteps = (TextView) findViewById(R.id.hwstepsTextView);
         btn_toggleStepCounter = (Button) findViewById(R.id.btn_toggleStepCounter);
         btn_toggleStepCounter.setOnClickListener(startClickListener);
-
-        sw_logFile = (Switch) findViewById(R.id.logSwitch);
-        sw_logFile.setChecked(false);
-        sw_logFile.setOnCheckedChangeListener(logFileSwitchListener);
-
-        sw_connectGT = (Switch) findViewById(R.id.gtdeviceSwitch);
-        sw_connectGT.setChecked(false);
-        sw_connectGT.setOnCheckedChangeListener(groundtruthSwitchListener);
 
         gtConnectingDialog = new ProgressDialog(this);
         gtConnectingDialog.setTitle("Connecting");
@@ -236,7 +225,6 @@ public class OxfordActivity extends AppCompatActivity {
                     logToFile = true;
                 } else {
                     logToFile = false;
-                    sw_logFile.setChecked(false);
                 }
                 return;
             }

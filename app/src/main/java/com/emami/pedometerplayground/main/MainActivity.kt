@@ -11,7 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.emami.pedometerplayground.R
+import com.emami.pedometerplayground.daisy.DaisyDebugActivity
+import com.emami.pedometerplayground.filtering.FilteringActivity
+import com.emami.pedometerplayground.google_sample.GooglePedometerActivity
 import com.emami.pedometerplayground.main.model.StepLogData
+import com.emami.pedometerplayground.oxford.OxfordActivity
+import com.emami.pedometerplayground.uwaterloo.lab3_201_04.WaterlooActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), ServiceConnection {
@@ -30,14 +35,28 @@ class MainActivity : AppCompatActivity(), ServiceConnection {
         main_btn_stop.setOnClickListener {
             stopPedometerService()
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        if (isServiceBounded) {
-            unbindService(this)
+        main_btn_daisy.setOnClickListener {
+            launchIntent(DaisyDebugActivity::class.java)
+        }
+        main_btn_filtering.setOnClickListener {
+            launchIntent(FilteringActivity::class.java)
+        }
+        main_btn_google.setOnClickListener {
+            launchIntent(GooglePedometerActivity::class.java)
+        }
+        main_btn_oxford.setOnClickListener {
+            launchIntent(OxfordActivity::class.java)
+        }
+        main_btn_waterloo.setOnClickListener {
+            launchIntent(WaterlooActivity::class.java)
         }
     }
+
+    private fun <T> launchIntent(jClass: Class<T>) {
+        startActivity(Intent(this, jClass))
+    }
+
+
 
     private fun stopPedometerService() {
         if (isServiceBounded) {

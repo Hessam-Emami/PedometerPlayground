@@ -47,7 +47,7 @@ public class WaterlooActivity extends AppCompatActivity {
 
 
         frameLayout.addView(graph);
-        graph.setVisibility(View.INVISIBLE);
+        graph.setVisibility(View.VISIBLE);
 //
 //        frameLayout.addView(mv);
 //        mv.setVisibility(View.VISIBLE);
