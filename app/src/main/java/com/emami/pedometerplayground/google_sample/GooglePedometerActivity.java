@@ -8,7 +8,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class SimplePedometerActivity extends Activity implements SensorEventListener, StepListener {
+public class GooglePedometerActivity extends Activity implements SensorEventListener, StepListener {
     private TextView textView;
     private SimpleStepDetector simpleStepDetector;
     private SensorManager sensorManager;
