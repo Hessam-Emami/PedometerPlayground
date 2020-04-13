@@ -12,4 +12,9 @@
         <item name="android:textStyle">bold</item>
         <item name="android:typeface">monospace</item>
     </style>
+
+    <style name="TextAppearance.PedometerPlayground.Button" parent="TextAppearance.AppCompat.Button">
+        <item name="android:typeface">monospace</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 </resources>
